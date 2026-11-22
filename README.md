@@ -1,151 +1,130 @@
-# Orbiq V3.3.2 — персональная плавающая панель Windows
+<div align="center">
+  <img src="docs/assets/orbiq-banner.png" alt="Orbiq — a floating desktop companion with an orbital planet" width="100%" />
 
-Orbiq — многофункциональная панель для Windows 10/11 на C# и WPF. Она сворачивается в плавающий круг с орбитальным логотипом, раскрывает основное окно и может оставаться в системном трее.
+  <h1>Orbiq</h1>
+  <p><strong>Your personal desktop companion.</strong></p>
+  <p>A customizable floating workspace for everyday tools on Windows.</p>
 
+  <p>
+    <a href="https://github.com/Aspydoras/Orbiq/releases/tag/v3.3.2"><img alt="Release v3.3.2" src="https://img.shields.io/badge/release-v3.3.2-39CFC2?style=for-the-badge" /></a>
+    <img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-2878D0?style=for-the-badge&logo=windows" />
+    <img alt=".NET 10" src="https://img.shields.io/badge/.NET-10-512BD4?style=for-the-badge&logo=dotnet" />
+    <img alt="9 interface languages" src="https://img.shields.io/badge/languages-9-7B61FF?style=for-the-badge" />
+  </p>
 
-## Языки интерфейса
+  <p>
+    <a href="https://github.com/Aspydoras/Orbiq/releases/tag/v3.3.2"><strong>Download Orbiq</strong></a>
+    · <a href="README_RU.md">Русская версия</a>
+    · <a href="https://github.com/Aspydoras/Orbiq/issues">Report an issue</a>
+  </p>
+</div>
 
-В настройках → Интерфейс → Язык интерфейса доступны девять офлайн-языков. Английский (EN) выбран по умолчанию:
+---
 
-- EN — English
-- RU — Русский
-- ES — Español
-- PT — Português
-- DE — Deutsch
-- FR — Français
-- ZH-CN — 简体中文 (упрощённый китайский)
-- JA — 日本語
-- KO — 한국어
+## What is Orbiq?
 
-Переключение языка применяется ко всем основным страницам, настройкам, навигации, меню и встроенным уведомлениям. Язык и код сохраняются в настройках. Пользовательские заметки, события календаря и собственное приветствие не переводятся автоматически.
-Переводы хранятся локально в `Localization/translations.tsv`; для работы приложения подключение к интернету не требуется.
+Orbiq is a Windows desktop companion built with **C# and WPF**. It stays close at hand as a small floating circular launcher, expands into a compact workspace, and can be hidden in the Windows notification area.
 
-## Изменение режима «Без повтора» в V3.2
+The goal is simple: keep everyday utilities together without turning the desktop into another large application window.
 
-В режиме **Без повтора** выбирается только время, без календарной даты. Если выбранное время ещё впереди сегодня, напоминание сработает сегодня. Если время уже прошло или совпадает с текущей минутой, ближайшее срабатывание переносится на завтра. Например, при текущем времени 20:00 и выбранном времени 16:00 напоминание сработает завтра в 16:00. После одного срабатывания оно отключается и больше не повторяется.
+## Features
 
-## Возможности
+| Tool | What it does |
+|---|---|
+| **Clock** | Stopwatch with lap times and a countdown timer with circular progress. |
+| **Notes** | Organize notes into sections, search, pin, color-code, and export to TXT or Markdown. |
+| **Calculator** | Mouse and keyboard input, scientific functions, memory keys, and calculation history. |
+| **Unit converter** | Convert physical measurements and view reference currency rates. Currency data requires an internet connection and includes its publication date. |
+| **Reminders** | Set daily reminders, selected weekdays, or a one-time reminder with sound and snooze options. |
+| **Pomodoro** | Configure work sessions, short breaks, long breaks, and the number of sessions before a long break. |
+| **Calendar** | Add dated events with a time and description; Orbiq notifies you at the scheduled time. |
+| **System monitor** | View CPU usage, RAM usage, battery status, and free space on the system drive. |
 
-- **Часы:** секундомер с отсечками и обратный таймер с круговой индикацией.
-- **Заметки:** разделы, поиск, категории, закрепление, пять готовых оттенков, собственный цвет через палитру, экспорт TXT/Markdown и удаление правой кнопкой мыши.
-- **Калькулятор:** ввод мышью и клавиатурой, научные функции, память и история вычислений.
-- **Конвертер:** физические величины и справочные валютные курсы. Для валют требуется интернет; курс сопровождается датой публикации.
-- **Напоминания:** ежедневно, по выбранным дням недели или без повтора. Для режима «Без повтора» указывается только время: если оно ещё не наступило сегодня, напоминание сработает сегодня; если время уже прошло или совпадает с текущей минутой — завтра. После одного срабатывания напоминание отключается. Есть отсрочка на 5, 10 и 30 минут.
-- **Pomodoro:** рабочий интервал, короткий и длинный перерыв, настраиваемые длительности и число рабочих сессий до длинного перерыва. Работает при сворачивании в круг или трей; после полного выхода текущий интервал не восстанавливается.
-- **Календарь:** события с датой, временем и описанием; уведомление в назначенное время.
-- **Мониторинг:** CPU, использование RAM, батарея и свободное место системного диска. Температура CPU не показывается, поскольку доступ к ней зависит от датчиков и драйверов устройства.
-- **Быстрые действия:** правая кнопка по плавающему кругу открывает меню разделов, скрытия в трей и выхода.
-- **Глобальные сочетания клавиш:** настраиваемые комбинации для открытия панели и отдельных разделов. По умолчанию поля пустые; дубликаты блокируются. Для глобального сочетания нужен модификатор Ctrl, Alt, Shift или Win. Windows может отказать в регистрации уже занятой комбинации.
-- **Темы:** чёрная, тёмная, светлая, голубая и собственная палитра.
-- **Иконка:** орбитальный логотип по умолчанию или своё изображение/GIF с кадрированием, масштабом и сдвигом.
-- **Звуки напоминаний:** мягкий, короткий, пользовательский WAV/MP3/WMA или отключённый; громкость регулируется отдельно.
-- **Резервные копии:** ручные ZIP-архивы, восстановление и необязательное автоматическое резервирование.
-- **Сброс настроек:** возвращает интерфейс, звук, размер кружка и горячие клавиши к значениям по умолчанию, сохраняя папку данных, расположение резервных копий и сами пользовательские данные.
+### Make it yours
 
-## Установка для разработки
+- **Floating launcher:** open sections from the circular desktop icon. Right-click it for quick actions, tray controls, and exit.
+- **Appearance:** choose dark, black, light, blue, or a custom color palette.
+- **Custom icon:** use an image or animated GIF, then adjust its crop, zoom, and position inside the circle.
+- **Reminder sounds:** choose a built-in sound, turn sound off, or use a custom WAV, MP3, or WMA file. Volume is adjustable.
+- **Nine interface languages:** English, Russian, Spanish, Portuguese, German, French, Simplified Chinese, Japanese, and Korean. Translations are stored locally and work offline.
+- **Global shortcuts:** assign keyboard combinations to actions. Duplicate combinations are rejected; global shortcuts require a modifier key (Ctrl, Alt, Shift, or Win).
+- **Backups:** create ZIP backups manually, restore from an archive, or enable optional automatic backups.
 
-1. Установи .NET 10 SDK: https://dotnet.microsoft.com/en-us/download/dotnet/10.0
-2. Установи Visual Studio Code и расширение C# Dev Kit.
-3. Распакуй архив в отдельную папку `Orbiq`.
-4. В VS Code выбери **File → Open Folder...** и открой папку `Orbiq`, где лежит `Orbiq.csproj`.
-5. Открой **Terminal → New Terminal** и выполни:
+## Download
+
+**Current public build: Orbiq v3.3.2 · Windows x64**
+
+1. Open the [Orbiq v3.3.2 release page](https://github.com/Aspydoras/Orbiq/releases/tag/v3.3.2).
+2. Download `Orbiq-v3.3.2-win-x64.zip` from the release assets.
+3. Extract the ZIP to a folder of your choice.
+4. Run `Orbiq.exe`.
+
+The release is a **self-contained Windows x64 build**. You do not need to install .NET separately to run it. Windows may show a SmartScreen notice for an app that is not widely downloaded or digitally signed; only use release files from a source you trust, and do not disable Windows security features to run unknown files.
+
+## Build from source
+
+### Requirements
+
+- Windows 10 or Windows 11 (x64)
+- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
+- [Visual Studio Code](https://code.visualstudio.com/) (or another editor)
+- Optional: C# Dev Kit extension for VS Code
+
+### Run in development
+
+Open the folder containing `Orbiq.csproj` in your editor, then run:
 
 ```powershell
 dotnet restore
 dotnet run
 ```
 
-Для получения автономной папки публикации:
+### Publish a standalone EXE
 
-```powershell
-dotnet publish -c Release -r win-x64 --self-contained true
-```
-
-
-## Сборка автономного EXE для Windows
-
-Для публикации Orbiq не требуется Visual Studio: достаточно .NET 10 SDK и терминала VS Code. В папке проекта запусти PowerShell-скрипт:
+In PowerShell, from the project folder:
 
 ```powershell
 .\publish-win-x64.ps1
 ```
 
-Скрипт собирает автономную версию для 64-битной Windows (`win-x64`), включает .NET runtime и нативные библиотеки в один файл и создаёт:
+The script publishes a self-contained `win-x64` build and creates the application output under `publish\win-x64` plus a ZIP archive under `artifacts`.
 
-- `publish\win-x64\Orbiq.exe` — исполняемый файл приложения;
-- `artifacts\Orbiq-v3.3.2-win-x64.zip` — ZIP для прикрепления к GitHub Release.
-
-Можно выполнить публикацию вручную одной командой:
+If PowerShell blocks the local script because of the current execution policy, you can allow scripts for the **current terminal process only** and run it again:
 
 ```powershell
-dotnet publish .\Orbiq.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=embedded -o .\publish\win-x64
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\publish-win-x64.ps1
 ```
 
-Это сборка для Windows x64. Пользователю не нужно отдельно устанавливать .NET. При первом запуске Windows может показать предупреждение SmartScreen для неизвестного/неподписанного приложения; не проси пользователей отключать защиту — лучше опубликовать проверенную сборку и со временем оформить цифровую подпись.
+This does not change the machine-wide execution policy. Review scripts before running them.
 
-Перед публикацией обязательно запусти `Orbiq.exe` на Windows и проверь запуск, трей, звук, пользовательскую иконку, сохранения и резервное копирование. Папки `bin`, `obj`, `publish` и `artifacts` исключены из Git через `.gitignore`.
+## Data, backups, and compatibility
 
-## Публикация исходников на GitHub
+Orbiq stores application data locally. To preserve data from earlier MiniHub versions, the application intentionally continues to use the legacy data locations when they already exist:
 
-1. Создай пустой репозиторий с названием `Orbiq` на GitHub. Не добавляй на сайте второй README, `.gitignore` или License — они уже могут находиться в локальной папке проекта.
-2. Открой терминал в папке `Orbiq` и выполни команды, заменив `YOUR-USERNAME` на своё имя пользователя GitHub:
+- `%LOCALAPPDATA%\MiniHub`
+- `%LOCALAPPDATA%\MiniHubApp\storage.json`
 
-```powershell
-git init
-git add .
-git commit -m "Orbiq v3.3.2 source"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/Orbiq.git
-git push -u origin main
-```
+This is a compatibility detail only; the visible application name and branding are Orbiq. User notes, reminders, calendar events, settings, imported sounds, and images are not part of the source repository. Use Orbiq's backup feature before moving data or reinstalling the application.
 
-3. На GitHub открой **Releases → Create a new release**, создай тег `v3.3.2` и прикрепи файл `artifacts\Orbiq-v3.3.2-win-x64.zip`. Исходный код хранится в репозитории, а готовая программа — в разделе Releases.
+## Notes and current limitations
 
-Не загружай в публичный репозиторий личную папку сохранений, резервные копии, пользовательские изображения/звуки, пароли, токены или другие личные данные. `.gitignore` исключает обычные папки сборки, но перед `git add .` всё равно проверь список файлов командой `git status`.
+- **One-time reminders:** choose a time only. If that time is still ahead today, the reminder is scheduled for today. If it has passed (or is the current minute), it is scheduled for tomorrow. It disables itself after firing once. Orbiq must remain running, either normally, minimized, or in the notification area.
+- **Pomodoro:** continues while Orbiq is minimized to the circle or notification area. An active interval is not restored after a full application exit.
+- **CPU temperature:** is not currently displayed because access to temperature sensors depends on the device and its drivers.
+- **Currency rates:** require an internet connection and are reference rates, not a guaranteed bank transaction rate.
+- **Platform:** the provided standalone release targets Windows x64.
 
-## Совместимость с прежними версиями MiniHub
+## Contributing and feedback
 
-Orbiq продолжает использовать прежнюю папку данных `%LOCALAPPDATA%\MiniHub` и служебную конфигурацию `%LOCALAPPDATA%\MiniHubApp\storage.json`, если они уже существуют. Это сделано намеренно, чтобы не потерять заметки, напоминания, календарь, темы, пользовательские звуки и изображения после перехода с MiniHub. В интерфейсе, имени сборки, значке, уведомлениях и меню используется новое название Orbiq.
+Bug reports, feature ideas, and feedback are welcome. Please open an [issue](https://github.com/Aspydoras/Orbiq/issues) and include your Orbiq version, Windows version, and steps to reproduce the problem. Do not attach private notes, backups, personal images, or other sensitive data.
 
-Старые архивы `MiniHub-*.zip` остаются совместимыми. Новые резервные копии создаются с префиксом `Orbiq-`.
+## License
 
-## Разовое напоминание
+A license has not yet been selected for this repository. Until a license is added, please do not assume that the source code may be reused, modified, or redistributed.
 
-В разделе **Напоминания** выбери режим **Без повтора** и укажи время `ЧЧ:ММ`. Дату выбирать не нужно: если выбранное время ещё впереди, напоминание сработает сегодня; если время уже прошло (или совпадает с текущей минутой), оно переносится на завтра. Например, если сейчас 20:00 и указать 16:00, напоминание сработает завтра в 16:00. После одного срабатывания оно автоматически отключается. Приложение должно оставаться запущенным; его можно свернуть в круг или системный трей. Его можно отложить из уведомления.
+---
 
-## Горячие клавиши
-
-Открой **Настройки → Горячие клавиши**. Нажми поле нужного действия и нажми комбинацию на клавиатуре. Повторяющиеся сочетания не принимаются. Удалить привязку можно кнопкой очистки рядом с полем. Комбинация действует глобально, пока Orbiq запущен.
-
-## Резервные копии
-
-Открой **Настройки → Система → Резервные копии**. Выбери каталог, отличный от папки текущих сохранений. Автоматическое резервирование по умолчанию выключено. Можно создать ZIP вручную или восстановить данные из архива. Перед восстановлением Orbiq попытается создать страховочную копию текущих данных. Приложение проверяет структуру архива и медиафайлов.
-
-Новые архивы имеют вид `Orbiq-дата-время-тип.zip`. Старые `MiniHub-*.zip` также можно восстановить. При автоматической ротации удаляются только распознанные архивы приложения, другие файлы в выбранной папке не затрагиваются.
-
-## Сброс настроек
-
-Кнопка **Настройки → Система → Сбросить настройки по умолчанию** восстанавливает:
-
-- приветствие: «Приятного использования»;
-- тему: «Тёмная»;
-- громкость: 50%, звук: «Мягкий сигнал»;
-- размер кружка: 50% допустимого диапазона;
-- масштаб пользовательской иконки: 1×, сдвиги по центру;
-- горячие клавиши: не назначены;
-- запуск вместе с Windows: выключен;
-- остальные пользовательские параметры — заводские значения.
-
-При этом сохраняются папка данных, папка резервных копий, архивы, заметки, напоминания, события календаря и пользовательские файлы в каталоге данных. Сброс не удаляет импортированные аудио и изображения с диска, но убирает их привязку в настройках.
-
-## Важное о путях данных
-
-Если старые сохранения MiniHub уже есть, Orbiq обнаружит их и продолжит использовать без мастера первого запуска. Папка `%LOCALAPPDATA%\MiniHub` и `%LOCALAPPDATA%\MiniHubApp` намеренно оставлены прежними только для совместимости; это не старое название в пользовательском интерфейсе.
-
-## Удаление
-
-В настройках доступно удаление только собранного приложения или приложения вместе с данными. При запуске из VS Code исходники проекта не удаляются. При удалении данных Orbiq удаляет только собственные файлы и распознанные резервные архивы; посторонние файлы в выбранных каталогах не затрагиваются.
-
-## Проверка
-
-Архив содержит полный исходный проект и орбитальный логотип (SVG, PNG, ICO). XAML/XML и целостность ZIP проверяются при подготовке релиза. Финальную сборку WPF и поведение Windows API необходимо проверять на Windows-компьютере командой `dotnet run`.
+<div align="center">
+  <sub>Orbiq · A little orbit of useful tools on your desktop.</sub>
+</div>
