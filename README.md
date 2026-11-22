@@ -119,6 +119,21 @@ This is a compatibility detail only; the visible application name and branding a
 
 Bug reports, feature ideas, and feedback are welcome. Please open an [issue](https://github.com/Aspydoras/Orbiq/issues) and include your Orbiq version, Windows version, and steps to reproduce the problem. Do not attach private notes, backups, personal images, or other sensitive data.
 
+## AI-Assisted Development
+
+Orbiq was developed with the assistance of artificial intelligence tools.
+
+AI assistance was used for:
+- Writing and refining parts of the source code.
+- Debugging and troubleshooting.
+- Improving the user interface and application architecture.
+- Localization and multilingual support.
+- Documentation and project presentation.
+
+**The project concept, feature requirements, design direction, testing, feedback, and release decisions are led by the project maintainer.**
+
+Orbiq is an independent project developed through human–AI collaboration.
+
 ## License
 
 A license has not yet been selected for this repository. Until a license is added, please do not assume that the source code may be reused, modified, or redistributed.
