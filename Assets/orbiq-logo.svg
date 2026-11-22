@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="planet" cx="34%" cy="25%" r="78%">
+      <stop offset="0" stop-color="#a8f7ff"/>
+      <stop offset="0.25" stop-color="#63d8ff"/>
+      <stop offset="0.58" stop-color="#3976d7"/>
+      <stop offset="1" stop-color="#192b68"/>
+    </radialGradient>
+    <linearGradient id="orbit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a9faff"/>
+      <stop offset="0.42" stop-color="#64d8cb"/>
+      <stop offset="0.78" stop-color="#7e8fff"/>
+      <stop offset="1" stop-color="#c4a8ff"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop offset="0" stop-color="#56e8ff" stop-opacity=".30"/>
+      <stop offset=".65" stop-color="#3f6eff" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#3f6eff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="planetGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8fbff" stop-opacity=".9"/>
+      <stop offset=".5" stop-color="#64d8cb" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#9b8dff" stop-opacity=".9"/>
+    </linearGradient>
+  </defs>
+  <!-- Soft atmospheric glow -->
+  <circle cx="256" cy="256" r="230" fill="url(#halo)"/>
+  <g transform="rotate(-24 256 256)">
+    <ellipse cx="256" cy="256" rx="210" ry="93" fill="none" stroke="#4edfff" stroke-width="28" opacity=".24" filter="url(#softGlow)"/>
+    <ellipse cx="256" cy="256" rx="210" ry="93" fill="none" stroke="url(#orbit)" stroke-width="17" stroke-linecap="round"/>
+  </g>
+  <!-- Planet glow and sphere -->
+  <circle cx="256" cy="256" r="105" fill="#4edfff" opacity=".35" filter="url(#planetGlow)"/>
+  <circle cx="256" cy="256" r="92" fill="url(#planet)" stroke="url(#rim)" stroke-width="4"/>
+  <path d="M190 224c17-37 54-59 94-52 20 4 39 15 52 31-25-13-55-16-80-5-25 10-44 31-54 57-8-9-13-19-12-31z" fill="#e7fdff" opacity=".24"/>
+  <ellipse cx="229" cy="209" rx="34" ry="15" transform="rotate(-28 229 209)" fill="#e8ffff" opacity=".24"/>
+  <!-- Orbit foreground accent -->
+  <g transform="rotate(-24 256 256)">
+    <path d="M65 256a210 93 0 0 0 382 0" fill="none" stroke="url(#orbit)" stroke-width="17" stroke-linecap="round" opacity=".98"/>
+    <path d="M78 283a210 93 0 0 0 78 54" fill="none" stroke="#b4faff" stroke-width="5" stroke-linecap="round" opacity=".95"/>
+  </g>
+  <!-- Small orbital satellites / stars -->
+  <circle cx="414" cy="159" r="14" fill="#c8fbff" opacity=".95"/>
+  <circle cx="414" cy="159" r="25" fill="#5de7ff" opacity=".22" filter="url(#planetGlow)"/>
+  <path d="M125 142l5 14 14 5-14 5-5 14-5-14-14-5 14-5z" fill="#aafaff" opacity=".95"/>
+  <path d="M389 355l4 11 11 4-11 4-4 11-4-11-11-4 11-4z" fill="#b7b4ff" opacity=".9"/>
+  <circle cx="105" cy="335" r="5" fill="#8d9fff"/>
+</svg>

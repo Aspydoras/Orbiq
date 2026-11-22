@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>Orbiq</AssemblyName>
+    <Version>3.3.1</Version>
+    <FileVersion>3.3.1.0</FileVersion>
+    <RootNamespace>Orbiq</RootNamespace>
+    <ApplicationIcon>Assets\orbiq.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\orbiq.ico">
+      <LogicalName>Orbiq.Assets.orbiq.ico</LogicalName>
+    </EmbeddedResource>
+    <Resource Include="Assets\orbiq-mark.png" />
+    <EmbeddedResource Include="Localization\translations.tsv">
+      <LogicalName>Orbiq.Localization.translations.tsv</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
