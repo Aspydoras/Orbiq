@@ -1,4 +1,4 @@
-# Orbiq V3.3.1 — персональная плавающая панель Windows
+# Orbiq V3.3.2 — персональная плавающая панель Windows
 
 Orbiq — многофункциональная панель для Windows 10/11 на C# и WPF. Она сворачивается в плавающий круг с орбитальным логотипом, раскрывает основное окно и может оставаться в системном трее.
 
@@ -73,7 +73,7 @@ dotnet publish -c Release -r win-x64 --self-contained true
 Скрипт собирает автономную версию для 64-битной Windows (`win-x64`), включает .NET runtime и нативные библиотеки в один файл и создаёт:
 
 - `publish\win-x64\Orbiq.exe` — исполняемый файл приложения;
-- `artifacts\Orbiq-v3.3.1-win-x64.zip` — ZIP для прикрепления к GitHub Release.
+- `artifacts\Orbiq-v3.3.2-win-x64.zip` — ZIP для прикрепления к GitHub Release.
 
 Можно выполнить публикацию вручную одной командой:
 
@@ -93,13 +93,13 @@ dotnet publish .\Orbiq.csproj -c Release -r win-x64 --self-contained true -p:Pub
 ```powershell
 git init
 git add .
-git commit -m "Orbiq v3.3.1 source"
+git commit -m "Orbiq v3.3.2 source"
 git branch -M main
 git remote add origin https://github.com/YOUR-USERNAME/Orbiq.git
 git push -u origin main
 ```
 
-3. На GitHub открой **Releases → Create a new release**, создай тег `v3.3.1` и прикрепи файл `artifacts\Orbiq-v3.3.1-win-x64.zip`. Исходный код хранится в репозитории, а готовая программа — в разделе Releases.
+3. На GitHub открой **Releases → Create a new release**, создай тег `v3.3.2` и прикрепи файл `artifacts\Orbiq-v3.3.2-win-x64.zip`. Исходный код хранится в репозитории, а готовая программа — в разделе Releases.
 
 Не загружай в публичный репозиторий личную папку сохранений, резервные копии, пользовательские изображения/звуки, пароли, токены или другие личные данные. `.gitignore` исключает обычные папки сборки, но перед `git add .` всё равно проверь список файлов командой `git status`.
 

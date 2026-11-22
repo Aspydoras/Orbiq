@@ -86,9 +86,15 @@ public static class StartupManager
 
         if (string.Equals(processName, "dotnet", StringComparison.OrdinalIgnoreCase))
         {
-            string? assemblyPath = Assembly.GetEntryAssembly()?.Location;
-            if (string.IsNullOrWhiteSpace(assemblyPath) || !File.Exists(assemblyPath))
-                throw new InvalidOperationException("Не удалось определить DLL приложения. Для автозагрузки собери Orbiq через dotnet publish.");
+            string? entryAssemblyName = Assembly.GetEntryAssembly()?.GetName().Name;
+            if (string.IsNullOrWhiteSpace(entryAssemblyName))
+                throw new InvalidOperationException("Не удалось определить имя DLL приложения. Для автозагрузки собери Orbiq через dotnet publish.");
+
+            // AppContext.BaseDirectory работает и при обычном запуске через dotnet,
+            // и при single-file publish (в отличие от Assembly.Location).
+            string assemblyPath = Path.Combine(AppContext.BaseDirectory, $"{entryAssemblyName}.dll");
+            if (!File.Exists(assemblyPath))
+                throw new InvalidOperationException("Не удалось найти DLL приложения. Для автозагрузки собери Orbiq через dotnet publish.");
             command = $"\"{processPath}\" \"{assemblyPath}\"";
         }
         else

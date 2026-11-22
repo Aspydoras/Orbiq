@@ -3,13 +3,13 @@ $ErrorActionPreference = 'Stop'
 $project = Join-Path $PSScriptRoot 'Orbiq.csproj'
 $publishDir = Join-Path $PSScriptRoot 'publish\win-x64'
 $artifactsDir = Join-Path $PSScriptRoot 'artifacts'
-$zipPath = Join-Path $artifactsDir 'Orbiq-v3.3.1-win-x64.zip'
+$zipPath = Join-Path $artifactsDir 'Orbiq-v3.3.2-win-x64.zip'
 
 if (-not (Test-Path $project)) {
     throw "Не найден файл проекта: $project"
 }
 
-Write-Host 'Публикация Orbiq v3.3 для Windows x64...' -ForegroundColor Cyan
+Write-Host 'Публикация Orbiq v3.3.2 для Windows x64...' -ForegroundColor Cyan
 dotnet publish $project `
     --configuration Release `
     --runtime win-x64 `

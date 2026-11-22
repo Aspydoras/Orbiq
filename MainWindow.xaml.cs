@@ -2833,35 +2833,53 @@ public partial class MainWindow : Window
 
     private void UpdateConverterUnits()
     {
-        if (_categoryCombo is null || _fromUnitCombo is null || _toUnitCombo is null || _categoryCombo.SelectedIndex < 0) return;
-        int index = _categoryCombo.SelectedIndex;
+        ComboBox? categoryCombo = _categoryCombo;
+        ComboBox? fromUnitCombo = _fromUnitCombo;
+        ComboBox? toUnitCombo = _toUnitCombo;
+        if (categoryCombo is null || fromUnitCombo is null || toUnitCombo is null) return;
+
+        int index = categoryCombo.SelectedIndex;
+        if ((uint)index >= (uint)ConverterCategories.Count) return;
         CategoryDef selectedCategory = ConverterCategories[index];
         bool isCurrency = selectedCategory.Name == "Валюта";
         if (_currencyActionPanel is not null) _currencyActionPanel.Visibility = isCurrency ? Visibility.Visible : Visibility.Collapsed;
         Interlocked.Increment(ref _currencyRequestId);
         List<string> names = selectedCategory.Units.Select(u => u.Name).ToList();
         _updatingConverter = true;
-        _fromUnitCombo.ItemsSource = names;
-        _toUnitCombo.ItemsSource = names;
-        _fromUnitCombo.SelectedIndex = 0;
-        _toUnitCombo.SelectedIndex = Math.Min(1, names.Count - 1);
+        fromUnitCombo.ItemsSource = names;
+        toUnitCombo.ItemsSource = names;
+        fromUnitCombo.SelectedIndex = 0;
+        toUnitCombo.SelectedIndex = Math.Min(1, names.Count - 1);
         _updatingConverter = false;
         CalculateConversion();
     }
 
     private void CalculateConversion()
     {
-        if (_updatingConverter || _categoryCombo?.SelectedIndex < 0 || _fromUnitCombo?.SelectedIndex < 0 || _toUnitCombo?.SelectedIndex < 0 || _converterInput is null || _converterResult is null)
+        ComboBox? categoryCombo = _categoryCombo;
+        ComboBox? fromUnitCombo = _fromUnitCombo;
+        ComboBox? toUnitCombo = _toUnitCombo;
+        TextBox? converterInput = _converterInput;
+        TextBlock? converterResult = _converterResult;
+        if (_updatingConverter || categoryCombo is null || fromUnitCombo is null || toUnitCombo is null ||
+            converterInput is null || converterResult is null)
             return;
-        if (!double.TryParse(_converterInput.Text.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
+
+        int categoryIndex = categoryCombo.SelectedIndex;
+        int fromIndex = fromUnitCombo.SelectedIndex;
+        int toIndex = toUnitCombo.SelectedIndex;
+        if ((uint)categoryIndex >= (uint)ConverterCategories.Count) return;
+        CategoryDef category = ConverterCategories[categoryIndex];
+        if ((uint)fromIndex >= (uint)category.Units.Count || (uint)toIndex >= (uint)category.Units.Count) return;
+
+        if (!double.TryParse(converterInput.Text.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
         {
-            _converterResult.Text = LocalizationService.Translate("Проверь ввод");
+            converterResult.Text = LocalizationService.Translate("Проверь ввод");
             return;
         }
 
-        CategoryDef category = ConverterCategories[_categoryCombo.SelectedIndex];
-        UnitDef from = category.Units[_fromUnitCombo.SelectedIndex];
-        UnitDef to = category.Units[_toUnitCombo.SelectedIndex];
+        UnitDef from = category.Units[fromIndex];
+        UnitDef to = category.Units[toIndex];
         double baseValue;
         double converted;
 
@@ -2869,12 +2887,12 @@ public partial class MainWindow : Window
         {
             if (from.CurrencyCode == to.CurrencyCode)
             {
-                _converterResult.Text = value.ToString("G10", CultureInfo.InvariantCulture);
+                converterResult.Text = value.ToString("G10", CultureInfo.InvariantCulture);
                 if (_currencyStatus is not null) _currencyStatus.Text = LocalizationService.Translate("Одинаковая валюта — курс равен 1.");
             }
             else
             {
-                _converterResult.Text = LocalizationService.Translate("Нажми «Обновить курс»");
+                converterResult.Text = LocalizationService.Translate("Нажми «Обновить курс»");
                 if (_currencyStatus is not null) _currencyStatus.Text = LocalizationService.Translate("Курсы справочные; для обновления требуется подключение к интернету.");
             }
             return;
@@ -2893,40 +2911,52 @@ public partial class MainWindow : Window
             converted = baseValue / to.Factor;
         }
 
-        if (double.IsNaN(converted) || double.IsInfinity(converted)) _converterResult.Text = LocalizationService.Translate("Не удалось вычислить");
-        else _converterResult.Text = converted.ToString("G10", CultureInfo.InvariantCulture);
+        if (double.IsNaN(converted) || double.IsInfinity(converted)) converterResult.Text = LocalizationService.Translate("Не удалось вычислить");
+        else converterResult.Text = converted.ToString("G10", CultureInfo.InvariantCulture);
     }
 
     private async Task CalculateCurrencyConversionAsync()
     {
-        if (_categoryCombo?.SelectedIndex < 0 || _fromUnitCombo?.SelectedIndex < 0 || _toUnitCombo?.SelectedIndex < 0 ||
-            _converterInput is null || _converterResult is null || _currencyRefreshButton is null) return;
-        CategoryDef category = ConverterCategories[_categoryCombo.SelectedIndex];
+        ComboBox? categoryCombo = _categoryCombo;
+        ComboBox? fromUnitCombo = _fromUnitCombo;
+        ComboBox? toUnitCombo = _toUnitCombo;
+        TextBox? converterInput = _converterInput;
+        TextBlock? converterResult = _converterResult;
+        Button? currencyRefreshButton = _currencyRefreshButton;
+        if (categoryCombo is null || fromUnitCombo is null || toUnitCombo is null ||
+            converterInput is null || converterResult is null || currencyRefreshButton is null) return;
+
+        int categoryIndex = categoryCombo.SelectedIndex;
+        int fromIndex = fromUnitCombo.SelectedIndex;
+        int toIndex = toUnitCombo.SelectedIndex;
+        if ((uint)categoryIndex >= (uint)ConverterCategories.Count) return;
+        CategoryDef category = ConverterCategories[categoryIndex];
         if (category.Name != "Валюта") return;
-        UnitDef from = category.Units[_fromUnitCombo.SelectedIndex];
-        UnitDef to = category.Units[_toUnitCombo.SelectedIndex];
+        if ((uint)fromIndex >= (uint)category.Units.Count || (uint)toIndex >= (uint)category.Units.Count) return;
+        UnitDef from = category.Units[fromIndex];
+        UnitDef to = category.Units[toIndex];
         if (from.CurrencyCode is null || to.CurrencyCode is null) return;
-        if (!decimal.TryParse(_converterInput.Text.Replace(',', '.'), NumberStyles.Number, CultureInfo.InvariantCulture, out decimal amount))
+        if (!decimal.TryParse(converterInput.Text.Replace(',', '.'), NumberStyles.Number, CultureInfo.InvariantCulture, out decimal amount))
         {
-            _converterResult.Text = LocalizationService.Translate("Проверь ввод");
+            converterResult.Text = LocalizationService.Translate("Проверь ввод");
             return;
         }
         if (from.CurrencyCode == to.CurrencyCode)
         {
-            _converterResult.Text = amount.ToString("G12", CultureInfo.InvariantCulture);
+            converterResult.Text = amount.ToString("G12", CultureInfo.InvariantCulture);
             if (_currencyStatus is not null) _currencyStatus.Text = LocalizationService.Translate("Одинаковая валюта — курс равен 1.");
             return;
         }
 
         int requestId = Interlocked.Increment(ref _currencyRequestId);
-        _currencyRefreshButton.IsEnabled = false;
+        currencyRefreshButton.IsEnabled = false;
         if (_currencyStatus is not null) _currencyStatus.Text = LocalizationService.Translate("Получаю последний доступный справочный курс…");
         try
         {
             CurrencyRate rate = await _currencyRateService.GetRateAsync(from.CurrencyCode, to.CurrencyCode);
             if (requestId != _currencyRequestId || _currentPage != "Converter") return;
             decimal result = amount * rate.Rate;
-            _converterResult.Text = result.ToString("N4", LocalizationService.CurrentCulture);
+            converterResult.Text = result.ToString("N4", LocalizationService.CurrentCulture);
             if (_currencyStatus is not null)
                 _currencyStatus.Text = LocalizationService.Translate($"1 {from.CurrencyCode} = {rate.Rate.ToString("G8", CultureInfo.InvariantCulture)} {to.CurrencyCode} · дата курса: {rate.Date:dd.MM.yyyy}. Источник: Frankfurter.");
         }
@@ -2934,14 +2964,14 @@ public partial class MainWindow : Window
         {
             if (requestId == _currencyRequestId && _currencyStatus is not null)
             {
-                _converterResult.Text = LocalizationService.Translate("Курс недоступен");
+                converterResult.Text = LocalizationService.Translate("Курс недоступен");
                 _currencyStatus.Text = LocalizationService.Translate("Не удалось получить курс. Проверь интернет и попробуй ещё раз.") + " " + ex.Message;
             }
         }
         finally
         {
             if (requestId == _currencyRequestId && _currencyRefreshButton is not null)
-                _currencyRefreshButton.IsEnabled = true;
+                currencyRefreshButton.IsEnabled = true;
         }
     }
 
